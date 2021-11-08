@@ -1,3 +1,5 @@
+#define VC_EXTRALEAN
+#define WIN32_LEAN_AND_MEAN
 #include <iostream>
 #include <time.h>
 #include <cmath>
@@ -5,9 +7,11 @@
 #include <thread>
 typedef unsigned long long ULL;
 using namespace std;
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 void Info() {
+	ios_base::sync_with_stdio(false);
 	cout << "=================================================\n" \
 		"||     SIEVE OF ERATOSTHENES (x64_Windows)     ||\n" \
 		"||    Multithreaded Prime Numbers Algorithm    ||\n" \
@@ -23,10 +27,11 @@ void Info() {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-auto UserInput() -> ULL {
 
-	ULL reader;
-	bool inPut = true;
+auto UserInput() -> ULL {
+	ios_base::sync_with_stdio(false);
+	static ULL reader;
+	static bool inPut = true;
 	do {
 		cout << "How many numbers do you want to check for Primes?\n";
 		cout << "(2 to 254.999.999.998)\n\n" \
@@ -56,13 +61,16 @@ auto UserInput() -> ULL {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-auto askThreads(const ULL &numbers) -> ULL{
 
-	ULL numberOfThreads = 1;
-	bool inPut = true;
+auto askThreads(const ULL &numbers) -> ULL {
+
+	ios_base::sync_with_stdio(false);
+
+	static ULL numberOfThreads = 1;
+	static bool inPut = true;
 	do {
 		unsigned int reader;
-		ULL numThreadsMax = thread::hardware_concurrency();
+		static ULL numThreadsMax = thread::hardware_concurrency();
 		if (numThreadsMax == 0) {
 			numThreadsMax = 1;
 		}
@@ -101,15 +109,18 @@ auto askThreads(const ULL &numbers) -> ULL{
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void DisplayElapsedTime(const double &elapsedTime) {
+
+void DisplayElapsedTime(const double& elapsedTime) {
+	ios_base::sync_with_stdio(false);
 
 	cout << "\nIt took " << (elapsedTime / double(CLOCKS_PER_SEC)) << " seconds for the Sieve of Eratosthenes Algorithm" << endl;
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-auto PrimeCounter(const ULL &UPPER_BOUND,bool* primesList) -> ULL {
-	
-	ULL counter = 0;
+
+auto __forceinline PrimeCounter(const ULL &UPPER_BOUND, bool *primesList) -> ULL {
+	ios_base::sync_with_stdio(false);
+	static ULL counter = 0;
 
 	if (UPPER_BOUND < 2) {}
 
@@ -118,6 +129,8 @@ auto PrimeCounter(const ULL &UPPER_BOUND,bool* primesList) -> ULL {
 	}
 	else {
 		counter = 1;
+
+		#pragma omp parallel for
 		for (ULL i = 3; i <= UPPER_BOUND; i += 2) {
 			if (!primesList[i]) {
 				counter++;
@@ -128,17 +141,22 @@ auto PrimeCounter(const ULL &UPPER_BOUND,bool* primesList) -> ULL {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void DisplayNumberOfPrimes(ULL &count) {
 
-	ULL primesCount = count;
+void DisplayNumberOfPrimes(ULL &count) {
+	ios_base::sync_with_stdio(false);
+
+	static ULL primesCount = count;
 	cout << "\nPrime numbers found: " << primesCount << endl;
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void LastPrime(ULL &arraySize,bool* primes) {
 
+void __forceinline LastPrime(ULL &arraySize, bool *primes) {
+
+	ios_base::sync_with_stdio(false);
 	cout << "\nLast Prime number: ";
 
+	#pragma omp parallel for
 	for (ULL i = (arraySize - 1); i >= 2; i -= 2) {
 
 		if ((i - 1) < 2 && i >= 0) {
@@ -156,11 +174,12 @@ void LastPrime(ULL &arraySize,bool* primes) {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void PrintIt(ULL &UPPER_BOUND,bool* primes) {
 
-	ULL counter = 1;
-	char reader;
-	bool inPut = true;
+void __forceinline PrintIt(ULL& UPPER_BOUND, bool *primes) {
+	ios_base::sync_with_stdio(false);
+	static ULL counter = 1;
+	static char reader;
+	static bool inPut = true;
 
 	do {
 		cout << "\nDo you want to print all Prime numbers? (y/n)\n" \
@@ -175,15 +194,16 @@ void PrintIt(ULL &UPPER_BOUND,bool* primes) {
 				else {
 					cout << "\n\t2";
 
+					#pragma omp parallel for
 					for (ULL i = 3; i <= UPPER_BOUND; i += 2)
 					{
 						if (!primes[i]) {
-								cout << "\t" << i;
-								counter++;
-								if (counter % 10 == 0) {
-									cout << endl;
-								}
+							cout << "\t" << i;
+							counter++;
+							if (counter % 10 == 0) {
+								cout << endl;
 							}
+						}
 					}
 					cout << endl;
 				}
@@ -207,32 +227,63 @@ void PrintIt(ULL &UPPER_BOUND,bool* primes) {
 		}
 	} while (inPut);
 }
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 void wait() {
+	ios_base::sync_with_stdio(false);
 
 	cout << "\n\nPress <ENTER> to end program.\a" << endl;
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cin.get();
 }
-/*----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
-static void Sieve(ULL &x,ULL &y,const ULL &UPPER_BOUND,const ULL &sqrtUpperBound, bool* primes) {
 
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+static void __forceinline Sieve(ULL x,ULL y,const ULL &UPPER_BOUND,const ULL &sqrtUpperBound, bool* primes) {
+
+	#pragma omp parallel for
 	for (ULL i = x; i <= (sqrtUpperBound); i += y) {
+		#pragma omp parallel for
+		for (ULL test = i; test <= sqrtUpperBound; test += y)
+		{
+			if (primes[(test * test)]) {
+				i += y;
+			}
+			else {
+				break;
+			}
+		}
+
+		#pragma omp parallel for
 		for (ULL j = i; (i * j) <= UPPER_BOUND; j += 2) {
 			primes[(i * j)] = 1;
 		}
 	}
 }
-----------------------------------------------------------------------------*/
-static void Sieve2(ULL x,ULL y,const ULL &UPPER_BOUND,const ULL &sqrtUpperBound, bool* primes)
+//----------------------------------------------------------------------------
+
+static void __forceinline Sieve2(ULL x, ULL y, const ULL &UPPER_BOUND, const ULL &sqrtUpperBound, bool *primes)
 {
-	static ULL step = y;
+
+	static const ULL step = y;
 
 	while (x <= sqrtUpperBound)
-	{	y = x;
+	{
+		
+                #pragma omp parallel for
+		for (ULL test = x; test <= sqrtUpperBound; test += step)
+		{
+			if (primes[(test * test)]) {
+				x += step;
+			}
+			else {
+				break;
+			}
+		}
+		y = x;
+
 		while ((x * y) <= UPPER_BOUND)
 		{
 			primes[(x * y)] = 1;
@@ -243,23 +294,28 @@ static void Sieve2(ULL x,ULL y,const ULL &UPPER_BOUND,const ULL &sqrtUpperBound,
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void FindPrimesWithThreads(const ULL &numThreads,const ULL &userInput,const ULL &sqrtUserInput,bool* primes) {
 
-	vector<thread> threadVect;
-	ULL startNum = 1;
-
+void __forceinline FindPrimesWithThreads(const ULL &numThreads, const ULL &userInput, const ULL &sqrtUserInput, bool* primes) {
+	
+	ios_base::sync_with_stdio(false);
+	
+	static vector<thread> threadVect;
+	static ULL startNum = 1;
+	#pragma omp parallel for
 	for (ULL x = 0; x < numThreads; x++) {
 		threadVect.emplace_back(Sieve2, (startNum + 2), (numThreads * 2), userInput, sqrtUserInput, primes);
 		startNum += 2;
 	}
+	#pragma omp parallel for
 	for (auto& t : threadVect) {
 		t.join();
 	}
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-int main() {
 
+int main() {
+	ios_base::sync_with_stdio(false);
 	Info();
 	double start, end, elapsedTime;
 
@@ -268,7 +324,7 @@ int main() {
 	ULL sqrtUserInput = (ULL)sqrt(userInput);
 
 	cout << "\nBuilding array... ";
-	static bool* primes = new bool[arraySize] { false };
+	__declspec (align (64)) static bool *primes = new bool[arraySize] { false };
 	cout << "Ready.\n" << endl;
 
 	ULL numOfThreads = askThreads(userInput);
@@ -293,4 +349,3 @@ int main() {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-
