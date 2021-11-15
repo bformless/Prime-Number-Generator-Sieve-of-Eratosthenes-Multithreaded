@@ -2,7 +2,7 @@
 // aka: bformless
 // (c) 2019
 // Date: 07-31-2019
-// rewritten on: 11-14-2021
+// rewritten on: 11-15-2021
 // Todo: Code cleanup
 
 #define VC_EXTRALEAN
@@ -21,7 +21,7 @@ using std::chrono::milliseconds;
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 void Info() {
-	    cout << "=================================================\n" \
+	cout << "=================================================\n" \
 		    "||                                             ||\n" \
 		    "||           'SIEVE OF ERATOSTHENES'           ||\n" \
 		    "||                                             ||\n" \
@@ -282,7 +282,7 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 {
 	const ULL step = y;
 
-	while (x <= sqrtSieveSize)
+	while (x < sqrtSieveSize)
 	{
 		for (ULL test = x; test < sqrtSieveSize; test += step)
 		{
@@ -298,7 +298,7 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 
 		y = x;
 
-		while ((x * y) <= sieveSize)
+		while ((x * y) < sieveSize)
 		{
 			primeSieveArray[(x * y)] = 1;
 			y += 2;
