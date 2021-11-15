@@ -373,12 +373,6 @@ int main() {
 	cout << "\nDeleting the array and cleaning up... ";
 
 	delete[] primeSieveArray;
-	elapsedTime = 0;
-	sieveSize = 0;
-	primeSieveArraySize = 0;
-	sqrtSieveSize = 0;
-	numOfThreads = 0;
-	count = 0;
 
 	cout << "Ready.";
 
