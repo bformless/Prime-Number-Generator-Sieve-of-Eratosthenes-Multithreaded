@@ -98,7 +98,7 @@ auto askThreads(const ULL &numbers) -> ULL {
 			numThreadsMax = 1;
 		}
 
-		if (numbers < 3000000)
+		if (numbers < (262144 * numThreadsMax))
 		{
 			numThreadsMax = (numThreadsMax / numThreadsMax);
 		}
@@ -309,7 +309,6 @@ static void FindPrimesWithThreads(const ULL &numThreads, const ULL &sieveSize, c
 	ULL startNum = 1;
 
 	for (ULL x = 0; x < numThreads; ++x) {
-
 		threadVect.emplace_back(Sieve2, (startNum + 2), (numThreads * 2), sieveSize, sqrtSieveSize, primesSieveArray);
 		startNum += 2;
 	}
@@ -326,13 +325,13 @@ int main() {
 
 	double elapsedTime;
 	ULL sieveSize = UserInput();
-	ULL primeSieveArraySize = (sieveSize);
+	ULL primeSieveArraySize = (sieveSize+1);
 	ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
 	ULL numOfThreads = 0;
 	ULL count = 0;
 
 	cout << "\nBuilding array... ";
-  static bool *primeSieveArray = new bool[primeSieveArraySize] { false };
+	__declspec (align (64)) static bool *primeSieveArray = new bool[primeSieveArraySize] { false };
 	cout << "Ready.\n" << endl;
 
 	numOfThreads = askThreads(sieveSize);
