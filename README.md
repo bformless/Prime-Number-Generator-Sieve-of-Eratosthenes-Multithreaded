@@ -18,7 +18,7 @@ Todo:
    I have tested it, but it is slightly slower.
 
 3. A boolean is 8 bit in memory (standard array).
-   Maybe using a 1 bit array. (vector boolean or boost bitset)
+   Maybe using a 1 bit array to save memory. (vector boolean or boost bitset)
    
 <br>
 <hr>
