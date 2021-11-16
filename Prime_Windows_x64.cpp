@@ -2,6 +2,7 @@
 // aka: bformless
 // (c) 2019
 // Date: 07-31-2019
+//-------------------------
 // changed on: 11-16-2021
 // Todo: Code cleanup
 
@@ -278,6 +279,39 @@ static void wait() {
 }
 */
 //----------------------------------------------------------------------------
+static void Sieve1(ULL x, ULL y, const ULL& sieveSize, const ULL& sqrtSieveSize, bool* primeSieveArray)
+{
+	const ULL step = y;
+
+	while (x < sqrtSieveSize)
+	{
+		for (ULL test = x; test < sqrtSieveSize; test += step)
+		{
+
+			if (primeSieveArray[(test)]) { 
+				x += step;
+			}
+
+			else {
+				break;
+			}
+		}
+
+		y = x;
+
+		while ((x * y) < sieveSize)
+		{
+
+			primeSieveArray[(x * y)] = 1;
+			y += 2;
+
+		}
+		x += step;
+	}
+}
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize, bool *primeSieveArray)
 {
 	const ULL step = y;
@@ -346,7 +380,7 @@ int main() {
 
 	if (numOfThreads < 2) {
 		auto start = high_resolution_clock::now();
-		Sieve2(3, 2, sieveSize, sqrtSieveSize, primeSieveArray);
+		Sieve1(3, 2, sieveSize, sqrtSieveSize, primeSieveArray);
 		auto end = high_resolution_clock::now();
 		duration<double, std::milli> ms_double = end - start;
 		elapsedTime = (ms_double.count() / 1000);
