@@ -1,7 +1,7 @@
 # Sieve Of Eratosthenes Multithreaded
 Very fast Multithreaded Sieve of Eratosthenes Prime Number Generator, written in C++.
 
-Source code with a compiled Windows x64 Platform EXE included.
+Source code with a compiled Windows x64 (AVX2) Platform EXE included.
 
 Have fun!
 
