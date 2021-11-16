@@ -13,8 +13,10 @@ Have fun!
 
 Todo:
 1. Code cleanup
-2. adding use of AVX2 registers (maybe integrate Agner Fog's Vector Class Library)
-
+2. Adding calculation in AVX2 registers (maybe integrate Agner Fog's Vector Class Library)
+3. A boolean is 8 bit in memory, because of a standard array
+   maybe using vector<bool> or write own packed array -> 1 bit per boolean
+   (but this slows down the algo a little bit.)
 
 <br>
 <hr>
