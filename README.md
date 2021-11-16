@@ -14,7 +14,7 @@ Have fun!
 Todo:
 1. Code cleanup
 
-2. Use of AVX2 registers
+2. Use of AVX2 registers - 
    I have tested it, but it is slightly slower.
 
 3. A boolean is 8 bit in memory (standard array).
