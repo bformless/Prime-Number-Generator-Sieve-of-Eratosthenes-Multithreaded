@@ -2,7 +2,7 @@
 // aka: bformless
 // (c) 2019
 // Date: 07-31-2019
-// rewritten on: 11-15-2021
+// changed on: 11-16-2021
 // Todo: Code cleanup
 
 #define VC_EXTRALEAN
@@ -100,7 +100,7 @@ auto askThreads(const ULL &numbers) -> ULL {
 			numThreadsMax = 1;
 		}
 
-		if (numbers < (262144 * numThreadsMax))
+		if (numbers < (131072 * numThreadsMax))
 		{
 			numThreadsMax = (numThreadsMax / numThreadsMax);
 		}
@@ -263,7 +263,7 @@ static void wait() {
 
 		for (ULL test = i; test <= sqrtSieveSize; test += y)
 		{
-			if (primeSieveArray[(test)]) {
+			if (primeSieveArray[(test*test)]) {
 				i += y;
 			}
 			else {
@@ -287,7 +287,7 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 		for (ULL test = x; test < sqrtSieveSize; test += step)
 		{
 
-			if (primeSieveArray[(test)]) {
+			if (primeSieveArray[(test*test)]) { // multithreaded: (test * test) is faster ! singlethreaded should be only (test), because it's slightly faster
 					x += step;
 				}
 				
@@ -300,8 +300,10 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 
 		while ((x * y) < sieveSize)
 		{
+
 			primeSieveArray[(x * y)] = 1;
 			y += 2;
+
 		}
 		x += step;
 	}
