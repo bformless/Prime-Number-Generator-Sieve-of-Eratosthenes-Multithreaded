@@ -14,11 +14,9 @@ Todo:
 
 
 
-----------------------------------------------------------------------------------------------
 Processor: Intel i9-9940X - 3.3 Ghz - Turbo-Mode: off - 128 GB RAM (2400 Mhz Quadchannel)
-----------------------------------------------------------------------------------------------
 
-Picture: 10 billion numbers in about 15 seconds
+10 billion numbers in about 15 seconds
 
 ![Console](https://github.com/bformless/Prime-Number-Generator-Win64/blob/main/Sieve_of_E.jpg)
 
