@@ -14,7 +14,7 @@ Todo:
 
 Processor: Intel i9-9940X - 14 Cores / 28 Threads - 3.3 Ghz - Turbo-Mode: off
 
-!(https://github.com/bformless/Prime-Number-Generator-Win64/blob/main/Sieve_of_E.jpg?raw=true)
+![Console](https://raw.githubusercontent.com/bformless/Prime-Number-Generator-Win64/blob/main/Sieve_of_E.jpg?raw=true)
 
 
 
