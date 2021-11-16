@@ -14,7 +14,7 @@ Have fun!
 Todo:
 1. Code cleanup
 2. Adding calculation in AVX2 registers (maybe integrate Agner Fog's Vector Class Library)
-3. A boolean is 8 bit in memory (standard array). vector<bool> could be used or writing an alternative array with 1 bit per boolean
+3. A boolean is 8 bit in memory (standard array). Vector with booleans could be used or writing an alternative array with 1 bit per boolean
    (but this could slow down the algo a little bit.)
 
 <br>
