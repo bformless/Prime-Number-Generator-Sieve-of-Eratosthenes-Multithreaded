@@ -12,7 +12,9 @@ Todo:
 2. adding use of AVX2 registers (maybe integrate Agner Fog's Vector Class Library)
 
 
-
+<br>
+<hr>
+<br>
 
 Processor: Intel i9-9940X - 3.3 Ghz - Turbo-Mode: off - 128 GB RAM (2400 Mhz Quadchannel)
 
