@@ -1,9 +1,19 @@
-// Author: Michael Raebiger
-// aka: bformless
+// Author: 'Michael Raebiger' aka 'bformless'
+// Location: Munich, Germany
 // (c) 2019
+// 
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the "Software"),
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and /or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
 // Date: 07-31-2019
-//-------------------------
-// changed on: 11-16-2021
+// changed on: 12-02-2021
 // Todo: Code cleanup
 
 #define VC_EXTRALEAN
@@ -22,7 +32,7 @@ using std::chrono::milliseconds;
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 void Info() {
-	cout << "=================================================\n" \
+	    cout << "=================================================\n" \
 		    "||                                             ||\n" \
 		    "||           'SIEVE OF ERATOSTHENES'           ||\n" \
 		    "||                                             ||\n" \
@@ -90,7 +100,7 @@ auto UserInput() -> ULL {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-auto askThreads(const ULL &numbers) -> ULL {
+auto askThreads(ULL numbers) -> ULL {
 
 	ULL numberOfThreads = 1;
 	bool inPut = true;
@@ -135,13 +145,13 @@ auto askThreads(const ULL &numbers) -> ULL {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void DisplayElapsedTime(const double& elapsedTime) {
+static void DisplayElapsedTime(double elapsedTime) {
 
 	cout << "\nIt took " << (elapsedTime) << " seconds for the optimized Sieve of Eratosthenes Algorithm." << endl;
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-auto PrimeCounter(const ULL &sieveSize, bool *primeSieveArray) -> ULL {
+auto PrimeCounter(ULL sieveSize, bool *primeSieveArray) -> ULL {
 
 	ULL counter = 0;
 
@@ -164,14 +174,14 @@ auto PrimeCounter(const ULL &sieveSize, bool *primeSieveArray) -> ULL {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void DisplayNumberOfPrimes(ULL &count) {
+static void DisplayNumberOfPrimes(ULL count) {
 
 	ULL primesCount = count;
 	cout << "found: " << primesCount << endl;
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void LastPrime(ULL &sieveSize, bool *primeSieveArray) {
+static void LastPrime(ULL sieveSize, bool *primeSieveArray) {
 
 	cout << "\nThe last Prime number is ";
 
@@ -193,7 +203,7 @@ static void LastPrime(ULL &sieveSize, bool *primeSieveArray) {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void PrintIt(ULL& sieveSize, bool *primeSieveArray) {
+static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 
 	ULL counter = 1;
 	char reader;
@@ -256,7 +266,7 @@ static void wait() {
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-/* static void Sieve(ULL x, ULL y, const ULL& sieveSize, const ULL& sqrtSieveSize, bool* primeSieveArray) {
+/* static void Sieve(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSieveArray) {
 
 
 	for (ULL i = x; i <= (sqrtSieveSize); i += y) {
@@ -279,16 +289,16 @@ static void wait() {
 }
 */
 //----------------------------------------------------------------------------
-static void Sieve1(ULL x, ULL y, const ULL& sieveSize, const ULL& sqrtSieveSize, bool* primeSieveArray)
+static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSieveArray)
 {
-	const ULL step = y;
+	ULL step = y;
 
-	while (x < sqrtSieveSize)
+	while (x <= sqrtSieveSize)
 	{
-		for (ULL test = x; test < sqrtSieveSize; test += step)
+		for (ULL test = x; test <= sqrtSieveSize; test += step)
 		{
 
-			if (primeSieveArray[(test)]) { 
+			if (primeSieveArray[(test)] || primeSieveArray[(test * test)]) {
 				x += step;
 			}
 
@@ -299,7 +309,7 @@ static void Sieve1(ULL x, ULL y, const ULL& sieveSize, const ULL& sqrtSieveSize,
 
 		y = x;
 
-		while ((x * y) < sieveSize)
+		while ((x * y) <= sieveSize)
 		{
 
 			primeSieveArray[(x * y)] = 1;
@@ -312,16 +322,16 @@ static void Sieve1(ULL x, ULL y, const ULL& sieveSize, const ULL& sqrtSieveSize,
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize, bool *primeSieveArray)
+static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSieveArray)
 {
-	const ULL step = y;
+	ULL step = y;
 
-	while (x < sqrtSieveSize)
+	while (x <= sqrtSieveSize)
 	{
-		for (ULL test = x; test < sqrtSieveSize; test += step)
+		for (ULL test = x; test <= sqrtSieveSize; test += step)
 		{
 
-			if (primeSieveArray[(test*test)]) { // multithreaded: (test * test) is faster ! singlethreaded should be only (test), because it's slightly faster
+			if (primeSieveArray[(test)] || primeSieveArray[(test*test)]) { // multithreaded: (test * test) is faster ! singlethreaded should be only (test), because it's slightly faster
 					x += step;
 				}
 				
@@ -332,7 +342,7 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 
 		y = x;
 
-		while ((x * y) < sieveSize)
+		while ((x * y) <= sieveSize)
 		{
 
 			primeSieveArray[(x * y)] = 1;
@@ -344,7 +354,7 @@ static void Sieve2(ULL x, ULL y, const ULL &sieveSize, const ULL &sqrtSieveSize,
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void FindPrimesWithThreads(const ULL &numThreads, const ULL &sieveSize, const ULL &sqrtSieveSize, bool* primesSieveArray) {
+static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, ULL sqrtSieveSize, bool* primesSieveArray) {
 	
 	vector<thread> threadVect;
 	ULL startNum = 1;
@@ -367,13 +377,13 @@ int main() {
 
 	double elapsedTime;
 	ULL sieveSize = UserInput();
-	ULL primeSieveArraySize = (sieveSize+1);
+	ULL primeSieveArraySize = (sieveSize);
 	ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
 	ULL numOfThreads = 0;
 	ULL count = 0;
 
 	cout << "\nBuilding array... ";
-	__declspec (align (64)) static bool *primeSieveArray = new bool[primeSieveArraySize] { false };
+	static bool *primeSieveArray = new bool[primeSieveArraySize+1] { false };
 	cout << "Ready.\n" << endl;
 
 	numOfThreads = askThreads(sieveSize);
