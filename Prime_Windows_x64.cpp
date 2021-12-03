@@ -31,8 +31,18 @@ using std::chrono::milliseconds;
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
+static void wait() {
+
+	cout << "\n\nPress <ENTER> to end program.\a" << endl;
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.get();
+}
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 void Info() {
-	    cout << "=================================================\n" \
+	cout << "=================================================\n" \
 		    "||                                             ||\n" \
 		    "||           'SIEVE OF ERATOSTHENES'           ||\n" \
 		    "||                                             ||\n" \
@@ -103,17 +113,20 @@ auto UserInput() -> ULL {
 auto askThreads(ULL numbers) -> ULL {
 
 	ULL numberOfThreads = 1;
+	
 	bool inPut = true;
 	do {
 		unsigned int reader;
-		ULL numThreadsMax = thread::hardware_concurrency();
-		if (numThreadsMax == 0) {
+
+		ULL numThreadsMax = ceil(floor(numbers / 1572864LL)*2);
+
+		if (numThreadsMax == 0 || numbers <= 1572864LL) {
 			numThreadsMax = 1;
 		}
 
-		if (numbers < (131072 * numThreadsMax))
+		if (numThreadsMax >= thread::hardware_concurrency())
 		{
-			numThreadsMax = (numThreadsMax / numThreadsMax);
+			numThreadsMax = thread::hardware_concurrency();
 		}
 
 		cout << "How many Threads do you want to use?\n";
@@ -255,15 +268,7 @@ static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 		}
 	} while (inPut);
 }
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
-static void wait() {
 
-	cout << "\n\nPress <ENTER> to end program.\a" << endl;
-	cin.clear();
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	cin.get();
-}
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 /* static void Sieve(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSieveArray) {
@@ -295,18 +300,6 @@ static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSi
 
 	while (x <= sqrtSieveSize)
 	{
-		for (ULL test = x; test <= sqrtSieveSize; test += step)
-		{
-
-			if (primeSieveArray[(test)] || primeSieveArray[(test * test)]) {
-				x += step;
-			}
-
-			else {
-				break;
-			}
-		}
-
 		y = x;
 
 		while ((x * y) <= sieveSize)
@@ -316,7 +309,20 @@ static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSi
 			y += 2;
 
 		}
+
 		x += step;
+
+		for (ULL test = x; test <= sqrtSieveSize; test += step)
+		{
+
+			if (primeSieveArray[(test)]) {
+				x += step;
+			}
+
+			else {
+				break;
+			}
+		}
 	}
 }
 //----------------------------------------------------------------------------
@@ -328,18 +334,6 @@ static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSi
 
 	while (x <= sqrtSieveSize)
 	{
-		for (ULL test = x; test <= sqrtSieveSize; test += step)
-		{
-
-			if (primeSieveArray[(test)] || primeSieveArray[(test*test)]) { // multithreaded: (test * test) is faster ! singlethreaded should be only (test), because it's slightly faster
-					x += step;
-				}
-				
-			else {
-				break;
-			}
-		}
-
 		y = x;
 
 		while ((x * y) <= sieveSize)
@@ -350,6 +344,18 @@ static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSi
 
 		}
 		x += step;
+
+		for (ULL test = x; test <= sqrtSieveSize; test += step)
+		{
+
+			if (primeSieveArray[(test)]) { 
+				x += step;
+			}
+
+			else {
+				break;
+			}
+		}
 	}
 }
 //----------------------------------------------------------------------------
@@ -357,6 +363,7 @@ static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSi
 static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, ULL sqrtSieveSize, bool* primesSieveArray) {
 	
 	vector<thread> threadVect;
+	threadVect.reserve(numThreads);
 	ULL startNum = 1;
 
 	#pragma omp parallel for
@@ -367,6 +374,9 @@ static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, ULL sqrtSieveSi
     #pragma omp parallel for
 	for (auto& t : threadVect) {
 		t.join();
+	}
+	for (auto& t : threadVect) {
+		t.~thread();
 	}
 }
 //----------------------------------------------------------------------------
