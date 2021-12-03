@@ -387,8 +387,8 @@ int main() {
 
 	double elapsedTime;
 	ULL sieveSize = UserInput();
-	ULL primeSieveArraySize = (sieveSize);
-	ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
+	ULL primeSieveArraySize = (sieveSize+1);
+	ULL sqrtSieveSize = (ULL)sqrt(sieveSize+1);
 	ULL numOfThreads = 0;
 	ULL count = 0;
 
