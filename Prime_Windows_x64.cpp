@@ -13,7 +13,7 @@
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 //
 // Date: 07-31-2019
-// changed on: 12-03-2021
+// changed on: 12-06-2021
 // Todo: Code cleanup
 
 #define VC_EXTRALEAN
@@ -23,6 +23,7 @@
 #include <cmath>
 #include <vector>
 #include <thread>
+
 typedef unsigned long long ULL;
 using namespace std;
 using std::chrono::high_resolution_clock;
@@ -85,8 +86,8 @@ auto UserInput() -> ULL {
 		if (cin >> reader) {
 
 			// input worked
-			// possible max. 18.446.744.073.709.551.616 = 2^64 bit
-			// restricted to 2^64 bit minus 2^32 bit + 2
+			// possible max. 18.446.744.073.709.551.616 = 2^64
+			// restricted to 2^64 minus (2^32 + 2)
 			// To handle such a big number you need at least 16 Exbibyte of RAM
 
 			if (reader < 2 || reader > 18446744069414584318Ui64) {
@@ -118,7 +119,7 @@ auto askThreads(ULL numbers) -> ULL {
 	do {
 		unsigned int reader;
 
-		ULL numThreadsMax = ceil(floor(numbers / 1572864LL)*2);
+		ULL numThreadsMax = (ULL) ceil(floor(numbers / 1572864LL)*2);
 
 		if (numThreadsMax == 0 || numbers <= 1572864LL) {
 			numThreadsMax = 1;
@@ -135,13 +136,13 @@ auto askThreads(ULL numbers) -> ULL {
 
 		if (cin >> reader) {
 
-			// input worked
+			// wrong input
 			if (reader < 1 || reader > numThreadsMax) {
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				inPut = true;
 			}
-			else {
+			else { // input worked
 				numberOfThreads = reader;
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -168,15 +169,14 @@ auto PrimeCounter(ULL sieveSize, bool *primeSieveArray) -> ULL {
 
 	ULL counter = 0;
 
-	if (sieveSize < 2) {}
-
+	if (sieveSize < 2) {
+	}
 	else if (sieveSize < 3) {
 		counter = 1;
 	}
 	else {
 		counter = 1;
 
-		#pragma omp parallel for
 		for (ULL i = 3; i <= sieveSize; i += 2) {
 			if (!primeSieveArray[i]) {
 				counter++;
@@ -235,7 +235,6 @@ static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 				else {
 					cout << "\n\t2";
 
-					#pragma omp parallel for
 					for (ULL i = 3; i <= sieveSize; i += 2)
 					{
 						if (!primeSieveArray[i]) {
@@ -294,10 +293,13 @@ static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 }
 */
 //----------------------------------------------------------------------------
-static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSieveArray)
-{
-	ULL step = y;
-
+static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
+{	
+	const ULL sqrtSieveSize = ULL(sqrt(sieveSize));
+	ULL x = 3LL;
+	ULL y = 2LL;
+	const ULL step = y;
+	
 	while (x <= sqrtSieveSize)
 	{
 		y = x;
@@ -306,17 +308,18 @@ static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSi
 		{
 
 			primeSieveArray[(x * y)] = 1;
-			y += 2;
 
+			(y += step);
 		}
 
-		x += step;
+		(x += step);
 
-		for (ULL test = x; test <= sqrtSieveSize; test += step)
+		for (ULL test = x; test <= sqrtSieveSize; (test += step))
 		{
 
 			if (primeSieveArray[(test)]) {
-				x += step;
+
+				(x += step);
 			}
 
 			else {
@@ -328,10 +331,11 @@ static void Sieve1(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSi
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSieveArray)
+static void Sieve2(ULL x, ULL y, const ULL sieveSize, bool *primeSieveArray)
 {
-	ULL step = y;
-
+	const ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
+	const ULL step = y;
+	
 	while (x <= sqrtSieveSize)
 	{
 		y = x;
@@ -360,18 +364,17 @@ static void Sieve2(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool *primeSi
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, ULL sqrtSieveSize, bool* primesSieveArray) {
+static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, bool* primesSieveArray) {
 	
 	vector<thread> threadVect;
-	threadVect.reserve(numThreads);
+	//threadVect.reserve(numThreads);
 	ULL startNum = 1;
 
-	#pragma omp parallel for
 	for (ULL x = 0; x < numThreads; ++x) {
-		threadVect.emplace_back(Sieve2, (startNum + 2), (numThreads * 2), sieveSize, sqrtSieveSize, primesSieveArray);
+		threadVect.emplace_back(Sieve2, (startNum + 2), (numThreads * 2), sieveSize, primesSieveArray);
 		startNum += 2;
 	}
-    #pragma omp parallel for
+
 	for (auto& t : threadVect) {
 		t.join();
 	}
@@ -388,28 +391,27 @@ int main() {
 	double elapsedTime;
 	ULL sieveSize = UserInput();
 	ULL primeSieveArraySize = (sieveSize+1);
-	ULL sqrtSieveSize = (ULL)sqrt(sieveSize+1);
 	ULL numOfThreads = 0;
 	ULL count = 0;
 
 	cout << "\nBuilding array... ";
-	static bool *primeSieveArray = new bool[primeSieveArraySize+1] { false };
+	bool *primeSieveArray = new bool[primeSieveArraySize+1] { false };
 	cout << "Ready.\n" << endl;
 
 	numOfThreads = askThreads(sieveSize);
 
 	if (numOfThreads < 2) {
 		auto start = high_resolution_clock::now();
-		Sieve1(3, 2, sieveSize, sqrtSieveSize, primeSieveArray);
+			Sieve1(sieveSize, primeSieveArray);
 		auto end = high_resolution_clock::now();
-		duration<double, std::milli> ms_double = end - start;
+			duration<double, std::milli> ms_double = end - start;
 		elapsedTime = (ms_double.count() / 1000);
 	}
 	else {
 		auto start = high_resolution_clock::now();
-		FindPrimesWithThreads(numOfThreads, sieveSize, sqrtSieveSize, primeSieveArray);
+			FindPrimesWithThreads(numOfThreads, sieveSize, primeSieveArray);
 		auto end = high_resolution_clock::now();
-		duration<double, std::milli> ms_double = end - start;
+			duration<double, std::milli> ms_double = end - start;
 		elapsedTime = (ms_double.count() / 1000);
 	}
 
