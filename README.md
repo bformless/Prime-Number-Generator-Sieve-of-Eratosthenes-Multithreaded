@@ -38,3 +38,11 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 
 ![Console](https://github.com/bformless/Prime-Number-Generator-Win64/blob/main/Picture_2021-11-16_ST.jpg)
 
+<br>
+<hr>
+<br>
+
+Passes: 11267, Time: 5.000036, Avg: 0.000444, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
+
+mraebiger_cpp_single_uint64_8bit;11267;5.000036;1;algorithm=base,faithful=yes,bits=8
+
