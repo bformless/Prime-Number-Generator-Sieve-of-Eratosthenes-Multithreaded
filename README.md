@@ -14,11 +14,11 @@ Have fun!
 Todo:
 1. Code cleanup
 
-2. Use of AVX2 registers - 
+2. Use of AVX2 registers (Agner Fog's Vector Class Library) - 
    I have tested it, but it is slightly slower.
 
 3. A boolean is 8 bit in memory (standard array).
-   Maybe using a 1 bit array to save memory. (vector boolean or boost bitset)
+   A 1 bit array to save memory. (vector boolean or boost bitset)
    
 <br>
 <hr>
