@@ -47,7 +47,6 @@ Dave's Garage Speed Contest (Drag Race):
 Intel 9940X, Single Thread, 128 GB RAM
 <br>
 <br>
-Passes: 11267, Time: 5.000036, Avg: 0.000444, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
+Passes: 11302, Time: 5.000130, Avg: 0.000442, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
-mraebiger_cpp_single_uint64_8bit;11267;5.000036;1;algorithm=base,faithful=yes,bits=8
-
+mraebiger_cpp_single_uint64_8bit;11302;5.000130;1;algorithm=base,faithful=yes,bits=8
