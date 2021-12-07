@@ -54,6 +54,7 @@ Passes: 7145, Time: 5.000022, Avg: 0.000700, Limit: 1000000, Count1: 78498, Coun
 
 davepl_pol;7145;5.000022;1;algorithm=base,faithful=yes,bits=1
 <br>
+<br>
 My Algorithm:
 <br>
 Passes: 11302, Time: 5.000130, Avg: 0.000442, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
