@@ -294,10 +294,10 @@ static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 //----------------------------------------------------------------------------
 static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
 {	
-	const ULL sqrtSieveSize = ULL(sqrt(sieveSize));
+	ULL sqrtSieveSize = ULL(sqrt(sieveSize));
 	ULL x = 3LL;
 	ULL y = 2LL;
-	const ULL step = y;
+	ULL step = y;
 	
 	while (x <= sqrtSieveSize)
 	{
@@ -313,18 +313,29 @@ static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
 
 		(x += step);
 
-		for (ULL test = x; test <= sqrtSieveSize; (test += step))
-		{
+		ULL test = x;
 
-			if (primeSieveArray[(test)]) {
-
-				(x += step);
-			}
-
-			else {
+		while (test <= sqrtSieveSize) {
+			if (!primeSieveArray[(test)])
+			{
 				break;
 			}
+
+			x += step;
+			test = x;
 		}
+		//for (ULL test = x; test <= sqrtSieveSize; (test += step))
+		//{
+
+		//	if (primeSieveArray[(test)]) {
+
+		//		(x += step);
+		//	}
+
+		//	else {
+		//		break;
+		//	}
+		//}
 	}
 }
 //----------------------------------------------------------------------------
@@ -332,8 +343,8 @@ static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
 //----------------------------------------------------------------------------
 static void Sieve2(ULL x, ULL y, const ULL sieveSize, bool *primeSieveArray)
 {
-	const ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
-	const ULL step = y;
+	ULL sqrtSieveSize = (ULL)sqrt(sieveSize);
+	ULL step = y;
 	
 	while (x <= sqrtSieveSize)
 	{
@@ -348,17 +359,29 @@ static void Sieve2(ULL x, ULL y, const ULL sieveSize, bool *primeSieveArray)
 		}
 		x += step;
 
-		for (ULL test = x; test <= sqrtSieveSize; test += step)
-		{
+		ULL test = x;
 
-			if (primeSieveArray[(test)]) { 
-				x += step;
-			}
-
-			else {
+		while (test <= sqrtSieveSize) {
+			if (!primeSieveArray[(test)])
+			{
 				break;
 			}
+
+			x += step;
+			test = x;
 		}
+		//for (ULL test = x; test <= sqrtSieveSize; (test += step))
+		//{
+
+		//	if (primeSieveArray[(test)]) {
+
+		//		(x += step);
+		//	}
+
+		//	else {
+		//		break;
+		//	}
+		//}
 	}
 }
 //----------------------------------------------------------------------------
