@@ -44,8 +44,12 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 <br>
 
 Dave's Garage Speed Contest (Drag Race):
-
-Intel 9940X, Single Thread, 128 GB RAM
+<br>
+https://www.youtube.com/watch?v=yYcHWGxtRQo
+<br>
+Benchmark on:
+<br>
+Intel 9940X, Single Thread, 128 GB RAM, Windows 10 Professional
 <br>
 
 Dave's optimized Algorithm:
