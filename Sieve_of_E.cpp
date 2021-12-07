@@ -42,7 +42,7 @@ static void wait() {
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 void Info() {
-	cout << "=================================================\n" \
+	    cout << "=================================================\n" \
 		    "||                                             ||\n" \
 		    "||           'SIEVE OF ERATOSTHENES'           ||\n" \
 		    "||                                             ||\n" \
@@ -269,29 +269,6 @@ static void PrintIt(ULL sieveSize, bool *primeSieveArray) {
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-/* static void Sieve(ULL x, ULL y, ULL sieveSize, ULL sqrtSieveSize, bool* primeSieveArray) {
-
-
-	for (ULL i = x; i <= (sqrtSieveSize); i += y) {
-		
-
-		for (ULL test = i; test <= sqrtSieveSize; test += y)
-		{
-			if (primeSieveArray[(test*test)]) {
-				i += y;
-			}
-			else {
-				break;
-			}
-		}
-
-		for (ULL j = i; (i * j) <= sieveSize; j += 2) {
-			primeSieveArray[(i * j)] = 1;
-		}
-	}
-}
-*/
-//----------------------------------------------------------------------------
 static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
 {	
 	ULL sqrtSieveSize = ULL(sqrt(sieveSize));
@@ -324,21 +301,9 @@ static void Sieve1(const ULL sieveSize, bool* primeSieveArray)
 			x += step;
 			test = x;
 		}
-		//for (ULL test = x; test <= sqrtSieveSize; (test += step))
-		//{
-
-		//	if (primeSieveArray[(test)]) {
-
-		//		(x += step);
-		//	}
-
-		//	else {
-		//		break;
-		//	}
-		//}
 	}
 }
-//----------------------------------------------------------------------------
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 static void Sieve2(ULL x, ULL y, const ULL sieveSize, bool *primeSieveArray)
@@ -370,20 +335,9 @@ static void Sieve2(ULL x, ULL y, const ULL sieveSize, bool *primeSieveArray)
 			x += step;
 			test = x;
 		}
-		//for (ULL test = x; test <= sqrtSieveSize; (test += step))
-		//{
-
-		//	if (primeSieveArray[(test)]) {
-
-		//		(x += step);
-		//	}
-
-		//	else {
-		//		break;
-		//	}
-		//}
 	}
 }
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 static void FindPrimesWithThreads(ULL numThreads, ULL sieveSize, bool* primesSieveArray) {
