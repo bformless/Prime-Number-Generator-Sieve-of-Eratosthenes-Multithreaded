@@ -18,7 +18,7 @@ Todo:
 3. Different code for multithreaded Sieve
 <br>
 The multithreaded implementation was done quickly and fit very good.
-But i think there's much more performance possible, because with a small number range (e.g. < 50,000,000) the multithreaded solution is slower due to the threads overhead.
+But i think there's much more performance possible, because with a small number range (e.g. < 50,000,000) the multithreaded solution is slower in average due to the threads overhead.
 <br>
 <hr>
 <br>
