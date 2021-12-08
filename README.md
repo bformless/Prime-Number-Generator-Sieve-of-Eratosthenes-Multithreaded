@@ -44,6 +44,7 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 <h2>Dave's Garage Speed Contest (Drag Race):</h2>
 https://www.youtube.com/watch?v=yYcHWGxtRQo
 <br>
+This speed contest is not really meaningful. The range should be increased to at least 2 billion numbers and then the time needed for all prime numbers found should be stopped so that the results of the different algorithms can be better compared. Anyway...
 <br>
 Own benchmarks:
 <br>
