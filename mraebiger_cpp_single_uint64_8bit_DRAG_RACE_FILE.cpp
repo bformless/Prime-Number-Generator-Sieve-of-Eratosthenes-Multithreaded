@@ -14,7 +14,9 @@
 //
 // This Software was rewritten for "Dave's Garage Speed Contest"
 // with some of his Drag Race code (c) by Dave Plummer
-// Date: 12/07/2021
+// Date: 12/08/2021
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #include <iostream>
 #include <cmath>
@@ -50,6 +52,7 @@ bool validateResults(ULL const sieveSize, ULL const validatedcount)
 			{      10000019LL, 664580      },
 			{     100000000LL, 5761455     },
 			{     100000007LL, 5761456     },
+			{     982451653LL, 50000000    },
 			{    1000000000LL, 50847534    },
 			{    1000000007LL, 50847535    },
 			{   10000000000LL, 455052511   },					// added for 64 bit Sieves comparison
@@ -57,11 +60,12 @@ bool validateResults(ULL const sieveSize, ULL const validatedcount)
 			{  100000000000LL, 4118054813  },
 			{  100000000003LL, 4118054814  },
 			{ 1000000000000LL, 37607912018 },
-
 	};
 
 	auto result = resultsDictionary.find(sieveSize);
-	if (resultsDictionary.end() == result) {
+	
+	if (resultsDictionary.end() == result)
+	{
 		return false;
 	}
 	else {
@@ -69,14 +73,17 @@ bool validateResults(ULL const sieveSize, ULL const validatedcount)
 	}
 }
 
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 
 auto countPrimes(ULL sieveSize, bool *primeSieveArray) -> ULL {
 
 	ULL counter = 1;
 
 	for (ULL i = 3; i <= sieveSize; i += 2)
-		{
-			if (!primeSieveArray[i]) {
+	{
+			if (!primeSieveArray[i])
+			{
 				counter++;
 			}
 	}
@@ -84,19 +91,24 @@ auto countPrimes(ULL sieveSize, bool *primeSieveArray) -> ULL {
 	return counter;
 }
 
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
 void printResults(bool showResults, double elapsedTime, ULL passes, ULL sieveSize, bool *primeSieveArray)
 {
 	if (showResults)
 	{
 		printf("2, ");
 	}
-
+	
 	ULL count = (sieveSize >= 2);                             // Starting count (2 is prime)
+
 	for (ULL num = 3; num <= sieveSize; num += 2)
 	{
 		if (!primeSieveArray[num])
 		{
-			if (showResults) {
+			if (showResults)
+			{
 				printf("%llu, ", num);
 			}
 			count++;
@@ -107,6 +119,7 @@ void printResults(bool showResults, double elapsedTime, ULL passes, ULL sieveSiz
 	{
 		printf("\n");
 	}
+
 	printf("Passes: %llu, Time: %lf, Avg: %lf, Limit: %llu, Count1: %llu, Count2: %llu, Valid: %d\n",
 		passes,
 		elapsedTime,
@@ -126,22 +139,22 @@ void printResults(bool showResults, double elapsedTime, ULL passes, ULL sieveSiz
 // Standard algorithm for single thread
 // taken from my multithreaded Sieve of Eratosthenes program
 
-void __forceinline prime_Sieve(ULL const sieveSize, bool *primeSieveArray)
+void prime_Sieve(ULL const sieveSize, bool *primeSieveArray)
 {
 	ULL x = 3LL;
 	ULL y = 2LL;
 	ULL step = y;
 	ULL sqrtSieveSize = ULL(sqrt(sieveSize));
-
+	
 	while (x <= sqrtSieveSize)
+
 	{
 		y = x;
 
 		while ( (x * y) <= sieveSize)
+
 		{
-
 			primeSieveArray[(x * y)] = 1;
-
 			(y += step);
 		}
 
@@ -150,33 +163,31 @@ void __forceinline prime_Sieve(ULL const sieveSize, bool *primeSieveArray)
 		ULL test = x;
 
 		while (test <= sqrtSieveSize) {
-			if (!primeSieveArray[(test)])
+
+			if (!(primeSieveArray[(test)]))
 			{
 				break;
 			}
-			
 			x += step;
 			test = x;
 		}
+
 		//for (ULL test = x; test <= sqrtSieveSize; (test += step))
 		//{
-
 		//	if (primeSieveArray[(test)]) {
-
 		//		(x += step);
 		//	}
-
 		//	else {
 		//		break;
 		//	}
 		//}
 	}
-}
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
-int main() {
-
+int main()
+{
 	// disable synchronizing with console
 	ios_base::sync_with_stdio(false);
 
@@ -196,25 +207,31 @@ int main() {
 	while (milliseconds_sum.count() < 5000) {
 
 			// clearing the array
+
 			for (ULL index = 0; index <= sieveSize; ++index)
+
 			{
 				primeSieveArray[(index)] = 0;
 			}
 
 			// start timing the algorithm
+
 			start = std::chrono::steady_clock::now();
 
 				prime_Sieve(sieveSize, primeSieveArray);
 
 			// stop timing the algorithm
+
 			end = std::chrono::steady_clock::now();
 
 		++passes;
 
 		// adding up benchmark time
+
 		milliseconds_timer = (end - start);							
+
 		milliseconds_sum += (milliseconds_timer);
-		
+
 	}// end of benchmark loop
 
 	elapsedTime = (milliseconds_sum.count() / 1000);
@@ -224,5 +241,4 @@ int main() {
 	printResults(false, elapsedTime, passes, sieveSize, primeSieveArray);
 
 	delete[] primeSieveArray;
-
 }
