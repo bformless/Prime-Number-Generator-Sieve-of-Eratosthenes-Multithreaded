@@ -78,7 +78,7 @@ Passes: 11302, Time: 5.000130, Avg: 0.000442, Limit: 1000000, Count1: 78498, Cou
 mraebiger_cpp_single_uint64_8bit;11302;5.000130;1;algorithm=base,faithful=yes,bits=8
 <br>
 <br>
-My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile)::
+My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile):
 <br>
 Passes: 8520, Time: 5.000188, Avg: 0.000587, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
