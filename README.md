@@ -46,7 +46,10 @@ https://www.youtube.com/watch?v=yYcHWGxtRQo
 <br>
 This speed contest is not really meaningful!
 <br>
-The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured. Anyway...
+The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured.
+<br> Most of the multithreaded algorithms i have overlooked are simulations but not real multithreaded attempts for finding Primes in a given range.
+<br>Anyway! Here are some results:
+<br>
 <br>
 Own benchmarks:
 <br>
