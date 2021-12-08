@@ -51,42 +51,42 @@ Benchmarks on:
 Intel 9940X (standard BIOS settings), 128 GB RAM
 <br>
 
-<h2>Dave's optimized Algorithm (Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile):</h2>
+<h3>Dave's optimized Algorithm (Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile):</h3>
 <br>
 Passes: 7145, Time: 5.000022, Avg: 0.000700, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 davepl_pol;7145;5.000022;1;algorithm=base,faithful=yes,bits=1
 <br>
 <br>
-Dave's optimized Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile):
+<h3>Dave's optimized Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile):</h3>
 <br>
 Passes: 4902, Time: 5.000871, Avg: 0.001020, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 davepl_pol;4902;5.000871;1;algorithm=base,faithful=yes,bits=1
 <br>
 <br>
-Dave's optimized Algorithm (Single Thread, VM Linux Debian64 Bullseye, g++_compile):
+<h3>Dave's optimized Algorithm (Single Thread, VM Linux Debian64 Bullseye, g++_compile):</h3>
 <br>
 Passes: 7550, Time: 5.000559, Avg: 0.000662, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 davepl_pol;7550;5.000559;1;algorithm=base,faithful=yes,bits=1
 <br>
 <br>
-My current Algorithm (Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile):
+<h3>My current Algorithm (Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile):</h3>
 <br>
 Passes: 11302, Time: 5.000130, Avg: 0.000442, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 mraebiger_cpp_single_uint64_8bit;11302;5.000130;1;algorithm=base,faithful=yes,bits=8
 <br>
 <br>
-My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile):
+<h3>My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, clang-11_compile):</h3>
 <br>
 Passes: 8520, Time: 5.000188, Avg: 0.000587, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 mraebiger_cpp_single_uint64_8bit;8520;5.000188;1;algorithm=base,faithful=yes,bits=8
 <br>
 <br>
-My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, g++_compile):
+<h3>My current Algorithm (Single Thread, VM Linux Debian64 Bullseye, g++_compile):</h3>
 <br>
 Passes: 8230, Time: 5.000580, Avg: 0.000608, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
