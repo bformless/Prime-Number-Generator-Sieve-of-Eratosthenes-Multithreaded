@@ -94,4 +94,4 @@ mraebiger_cpp_single_uint64_8bit;8230;5.000580;1;algorithm=base,faithful=yes,bit
 <br>
 <br>
 <br>
-As you can see, the results are also compiler and platform specific. The Benchmark is therefore ... Decide for yourself! !;)
+As you can see, the results are also compiler and platform specific. This Speed Contest is therefore ... Decide for yourself! !;)
