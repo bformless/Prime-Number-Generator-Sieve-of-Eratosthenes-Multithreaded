@@ -1,5 +1,5 @@
 # Sieve Of Eratosthenes Multithreaded
-Very fast 64 bit real (not simulated!) Multithreaded Sieve of Eratosthenes Prime Number Generator, written in C++. <br>
+Very fast 64 bit (real! not simulated!) Multithreaded Sieve of Eratosthenes Prime Number Generator, written in C++. <br>
 (You can calculate Primes up to 18.446.744.069.414.584.318, if you have enough RAM installed -> ~ 16 Exbibytes)
 
 Source code with a compiled Windows x64 EXE included.
