@@ -18,7 +18,7 @@ Todo:
 3. Different code for multithreaded Sieve
 <br>
 The multithreaded implementation was done quickly and fits very good.
-But i think there's much more performance possible, because with a small number range (e.g. < 50,000,000) the multithreaded solution is slower in average due to the threads overhead. I have to consider an other formula for multi threads. Maybe a range for every thread might be a solution.
+But i think there's much more performance possible, because with a small range of numbers (e.g. < 50,000,000) the multithreaded solution is slower in average due to the threads overhead. I have to consider an other formula for multi threads. Maybe a range for every thread might be a solution.
 <br>
 <hr>
 <br>
@@ -44,7 +44,9 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 <h2>Dave's Garage Speed Contest (Drag Race):</h2>
 https://www.youtube.com/watch?v=yYcHWGxtRQo
 <br>
-This speed contest is not really meaningful!<br>The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured, so that the results of the different algorithms can be compared. Anyway...
+This speed contest is not really meaningful!
+<br>
+The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured. Anyway...
 <br>
 Own benchmarks:
 <br>
