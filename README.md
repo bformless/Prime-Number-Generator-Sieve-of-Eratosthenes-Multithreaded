@@ -17,7 +17,7 @@ Todo:
 2. Reducing memory footprint
 3. Different code for multithreaded Sieve
 <br>
-The multithreaded implementation was done quickly and fit very good.
+The multithreaded implementation was done quickly and fits very good.
 But i think there's much more performance possible, because with a small number range (e.g. < 50,000,000) the multithreaded solution is slower in average due to the threads overhead. I have to consider an other formula for multi threads. Maybe a range for every thread might be a solution.
 <br>
 <hr>
