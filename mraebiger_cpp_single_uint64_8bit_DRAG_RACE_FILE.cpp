@@ -207,7 +207,6 @@ int main()
 	while (milliseconds_sum.count() < 5000) {
 
 			// clearing the array
-
 			for (ULL index = 0; index <= sieveSize; ++index)
 
 			{
@@ -215,30 +214,22 @@ int main()
 			}
 
 			// start timing the algorithm
-
 			start = std::chrono::steady_clock::now();
 
 				prime_Sieve(sieveSize, primeSieveArray);
 
 			// stop timing the algorithm
-
 			end = std::chrono::steady_clock::now();
 
 		++passes;
 
 		// adding up benchmark time
-
 		milliseconds_timer = (end - start);							
-
 		milliseconds_sum += (milliseconds_timer);
-
 	}// end of benchmark loop
-
+	
 	elapsedTime = (milliseconds_sum.count() / 1000);
-
 	ios_base::sync_with_stdio(true);
-
 	printResults(false, elapsedTime, passes, sieveSize, primeSieveArray);
-
 	delete[] primeSieveArray;
 }
