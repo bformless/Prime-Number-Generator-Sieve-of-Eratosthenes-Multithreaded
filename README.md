@@ -50,6 +50,9 @@ Benchmarks on:
 <br>
 Intel 9940X (standard BIOS settings), 128 GB RAM
 <br>
+Range: 1,000,000 - 5 seconds:
+<br>
+<br>
 <h3>Dave's optimized Algorithm (Single Thread):</h3>
 <h4>Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile:</h4>
 Passes: 7145, Time: 5.000022, Avg: 0.000700, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
