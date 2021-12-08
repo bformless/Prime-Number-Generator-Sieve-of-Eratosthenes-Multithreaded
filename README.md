@@ -19,9 +19,7 @@ Todo:
 3. Reducing memory footprint
 4. Different code for multithreaded Sieve
 <br>
-<br>
 The implementation was fast and easy and fit very good.
-<br>
 But i think there's much more performance possible.
 <br>
 <hr>
