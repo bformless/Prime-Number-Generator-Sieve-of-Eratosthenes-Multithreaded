@@ -91,3 +91,6 @@ mraebiger_cpp_single_uint64_8bit;8520;5.000188;1;algorithm=base,faithful=yes,bit
 Passes: 8230, Time: 5.000580, Avg: 0.000608, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
 mraebiger_cpp_single_uint64_8bit;8230;5.000580;1;algorithm=base,faithful=yes,bits=8
+<br>
+<br>
+As you can see, the results are also compiler and platform specific.
