@@ -44,10 +44,9 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 <h2>Dave's Garage Speed Contest (Drag Race):</h2>
 https://www.youtube.com/watch?v=yYcHWGxtRQo
 <br>
-This speed contest is not really meaningful!
+This speed contest is not really meaningful !
 <br>
-The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured.
-<br> Most of the multithreaded algorithms i have overlooked are simulations but not real multithreaded attempts for finding Primes in a given range.
+The range should be increased to at least 2 billion numbers and then the time needed for all found prime numbers should be measured. Most of the multithreaded algorithms i have looked at aren't really multithreaded but simulations. They are just pretending that in a given range they are trying to divide the search for prime numbers among the individual threads. Some algorithms only add up the rounds performed by each thread.
 <br>Anyway! Here are some results:
 <br>
 <br>
