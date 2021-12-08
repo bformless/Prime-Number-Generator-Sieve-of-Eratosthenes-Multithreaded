@@ -50,9 +50,7 @@ Benchmarks on:
 <br>
 Intel 9940X (standard BIOS settings), 128 GB RAM
 <br>
-
 <h3>Dave's optimized Algorithm:</h3>
-<br>
 <h4>Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile:</h4>
 Passes: 7145, Time: 5.000022, Avg: 0.000700, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
@@ -68,8 +66,8 @@ Passes: 7550, Time: 5.000559, Avg: 0.000662, Limit: 1000000, Count1: 78498, Coun
 
 davepl_pol;7550;5.000559;1;algorithm=base,faithful=yes,bits=1
 <br>
-<h3>My current Algorithm<h3>
 <br>
+<h3>My current Algorithm<h3>
 <h4>Single Thread, Windows 10 Pro, Visual Studio 2019, LLVM + MSVC compile:</h4>
 Passes: 11302, Time: 5.000130, Avg: 0.000442, Limit: 1000000, Count1: 78498, Count2: 78498, Valid: 1
 
