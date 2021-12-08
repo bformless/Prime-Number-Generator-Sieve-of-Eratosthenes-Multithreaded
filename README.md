@@ -54,7 +54,7 @@ Own benchmarks:
 <br>
 Intel 9940X (standard BIOS settings, HT on, Turbomode: on), 128 GB RAM (Quadchannel, 2,4 Ghz)
 <br>
-Range: 1,000,000 numbers  Time: 5 seconds:
+Range: 1,000,000 numbers  Time: 5 seconds loop
 <br>
 <br>
 <h3>Dave's optimized Algorithm (Single Thread):</h3>
