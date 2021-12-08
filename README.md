@@ -41,8 +41,7 @@ Singlethreaded (1 Thread) - 10 billion numbers searched for Primes in about 67 s
 <hr>
 <br>
 
-Dave's Garage Speed Contest (Drag Race):
-<br>
+<h2>Dave's Garage Speed Contest (Drag Race):</h2>
 https://www.youtube.com/watch?v=yYcHWGxtRQo
 <br>
 <br>
