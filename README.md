@@ -14,12 +14,10 @@ Have fun!
 
 Todo:
 1. Code cleanup
-
-2. AVX2 registers
-3. Reducing memory footprint
-4. Different code for multithreaded Sieve
+2. Reducing memory footprint
+3. Different code for multithreaded Sieve
 <br>
-The implementation was fast and easy and fit very good.
+The multithreaded implementation was done quickly and fit very good.
 But i think there's much more performance possible.
 <br>
 <hr>
